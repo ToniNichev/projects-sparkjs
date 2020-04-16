@@ -43,6 +43,11 @@ function response(req, res, apiData, templateName) {
   res.end();
 }
 
+app.get('/Robots.txt', (req, res) => {   
+  res.send(`
+  User-agent: * Disallow: /
+  `)
+});
 
 app.get('/*', (req, res) => {   
   fetch('https://learnappmaking.com/ex/users.json')
