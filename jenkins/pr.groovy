@@ -12,6 +12,7 @@ pipeline {
     }
     stage('Install dependencies') {
       steps {
+        pwd
         echo '######################'              
         echo 'Building...'          
         echo '######################'                      
