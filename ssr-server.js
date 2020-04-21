@@ -13,11 +13,14 @@ const {APP_HOST, SERVER_PORT} = process.env;
 
 const app = express();
 
+
 app.use('/server-build', express.static('./server-build'));
 app.use('/dist', express.static('dist')); // to serve frontent prod static files
 app.use('/favicon.ico', express.static('./static-assets/favicon.ico'));
 
 function response(req, res, apiData, templateName) {
+  // make APP data available for SSR and browser.
+  global.__API_DATA__ = apiData;
   const Html = templateList[templateName];
   // Prepare to get list of all modules that have to be loaded for this route
   let modules = [];
@@ -37,7 +40,6 @@ function response(req, res, apiData, templateName) {
   // console.log(">>cssBundles>>", cssBundles);
 
   const html = <Html content={HTML_content} cssBundles={cssBundles} jsBundles={jsBundles} apiData={apiData}/>;
-
   res.status(200);
   res.send(`<!doctype html>\n${ReactDOMServer.renderToStaticMarkup(html)}`);
   res.end();
@@ -50,7 +52,7 @@ app.get('/Robots.txt', (req, res) => {
 });
 
 app.get('/*', (req, res) => {   
-  fetch('https://learnappmaking.com/ex/users.json')
+  fetch('http://www.toni-develops.com/external-files/examples/sample-apis/users.json')
   .then(function(response) {
       if (response.status >= 400) {
           throw new Error("Bad response from server");
