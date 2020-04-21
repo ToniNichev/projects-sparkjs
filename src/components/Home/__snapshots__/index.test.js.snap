@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Testing Home component renders as expected! 1`] = `
+<div>
+  <div>
+    <div>
+      Title test
+    </div>
+    <p>
+      Jhon
+    </p>
+  </div>
+  <div>
+    <p>
+      right rail
+    </p>
+  </div>
+</div>
+`;
+
 exports[`Testing Home component renders as expected!!! 1`] = `
 <div>
   <div>
