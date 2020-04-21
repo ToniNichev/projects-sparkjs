@@ -4,7 +4,8 @@ import MockAPI from './__mocks__/api-data.json';
 
 
 const Renderer = ({title}) => {
-  const names = global.__API_DATA__.home.map( (data) => { return data.first_name }).join(',');
+  const namesArray = typeof global.__API_DATA__ !== 'undefined' ? global.__API_DATA__.home : MockAPI.home;
+  const names = namesArray.map( (data) => { return data.first_name }).join(',');
   return (
     <div className={styles.wrapper}>
         <div className={styles.leftRail}>

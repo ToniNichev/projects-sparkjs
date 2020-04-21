@@ -15,7 +15,6 @@ const client = (props) => (
 const context = {};
 
 const server = (props) => {
-//debugger;
  return (
   <StaticRouter location={ props.url } context={context}>
     <Switch>
@@ -24,7 +23,6 @@ const server = (props) => {
   </StaticRouter>
 );
 }
-
 
 export default ( {req} ) => (
   <div className={styles.appWrapper}>
