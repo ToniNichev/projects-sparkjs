@@ -15,7 +15,7 @@ pipeline {
         echo '######################'              
         echo 'Building...'          
         echo '######################'                      
-        sh 'yarn install'
+        sh '/usr/local/bin/yarn install'
       }
     }
      
@@ -24,7 +24,7 @@ pipeline {
         echo '######################'              
         echo 'Running tests ...'          
         echo '######################'               
-         sh 'yarn test'
+         sh '/usr/local/bin/yarn test'
       }
     }      
   }
@@ -32,7 +32,7 @@ pipeline {
   post { 
       always { 
           echo 'Starting server ...'
-          sh 'yarn clean; yarn build-prod; yarn build-prod-ssr;'
+          sh '/usr/local/bin/yarn clean; yarn build-prod; yarn build-prod-ssr;'
           sh 'pm2 start ./server-build/server-bundle.js -f'
       }
   }  
