@@ -1,8 +1,3 @@
-import jenkins.model.Jenkins
-
-def instance = Jenkins.instance
-instance.setCrumbIssuer(null)
-
 pipeline {
   agent any
     
