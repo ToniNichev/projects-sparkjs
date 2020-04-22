@@ -12,7 +12,6 @@ pipeline {
     }
     stage('Install dependencies') {
       steps {
-        echo "ERROR"
         echo '######################'              
         echo 'Building...'          
         echo '######################'                      
@@ -29,4 +28,5 @@ pipeline {
       }
     }      
   }
+  
 }
