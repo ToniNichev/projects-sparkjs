@@ -1,6 +1,6 @@
 import React from 'react';
 
-const publicPath = `http://${process.env.APP_HOST}:${process.env.ASSETS_SERVER_PORT}/dist/`;
+const publicPath = `${process.env.APP_HOST}:${process.env.ASSETS_SERVER_PORT}/dist/`;
 
 const Html = ({ content, cssBundles, jsBundles, apiData }) => (
   <html lang="en">  

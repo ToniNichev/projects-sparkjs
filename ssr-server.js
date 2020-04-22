@@ -1,5 +1,7 @@
+import fs from 'fs';
 import React from 'react';
 import express from 'express';
+import https  from 'https';
 import fetch from 'isomorphic-fetch';
 import App from './src/components/App';
 import Loadable from 'react-loadable';
@@ -9,7 +11,7 @@ import ReactDOMServer from 'react-dom/server';
 import PageData from './src/containers/PageLayout/PageData'; 
 import templateList from './src/templates/TemplateList';
 
-const {APP_HOST, SERVER_PORT} = process.env;
+const {APP_HOST, SERVER_PORT, ENVIRONMENT} = process.env;
 
 const app = express();
 
@@ -73,7 +75,23 @@ app.get('/*', (req, res) => {
 });
 
 Loadable.preloadAll().then(() => {
-  app.listen(SERVER_PORT, () => {
-    console.log(`😎 Server is listening on port ${SERVER_PORT}`);
-  });
+
+  if(ENVIRONMENT == 'development') {
+    // use plain http for development
+    app.listen(SERVER_PORT, () => {
+      console.log(`😎 Server is listening on port ${SERVER_PORT}`);
+    });  
+  }
+  else {
+    // we will pass the 'app' to 'https' server
+    https.createServer({
+      // replace with certificate location
+      key: fs.readFileSync('/Users/toninichev/.getssl/toni-develops.com/toni-develops.com.key'),
+      cert: fs.readFileSync('/Users/toninichev/.getssl/toni-develops.com/toni-develops.com.crt')
+    }, app)
+    .listen(SERVER_PORT);
+  }
+
+
+
 });
