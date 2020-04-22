@@ -31,4 +31,12 @@ pipeline {
       }
     }      
   }
+
+  post { 
+      always { 
+          echo 'Starting server ...'
+          sh 'yarn stop'
+          sh 'yarn start'
+      }
+  }  
 }
