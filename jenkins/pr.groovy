@@ -34,7 +34,7 @@ pipeline {
       always { 
           echo 'Starting server ...'
           sh '/usr/local/bin/yarn clean; /usr/local/bin/yarn build-prod; /usr/local/bin/yarn build-prod-ssr;'
-          sh 'pm2 start ./server-build/server-bundle.js -f'
+          sh '/usr/local/bin/pm2 start ./server-build/server-bundle.js -f'
       }
   }  
 }
