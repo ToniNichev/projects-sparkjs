@@ -13,7 +13,8 @@ class PageLayout extends Component {
 
       const allLayout = page.layout.map((layoutList) => {
         const layout = layoutList.components.map((component, id , components) => {
-          const componentName = component.name;        
+          const componentName = component.name;    
+          const props = component.props;    
           const ChildComponent = ComponentList[componentName];
           if(typeof ChildComponent === 'undefined') {
             return(
@@ -21,7 +22,7 @@ class PageLayout extends Component {
             );
           }
           return (
-              <ChildComponent key={componentName} />
+              <ChildComponent key={componentName} props={props} />
           );
         });
         return layout;

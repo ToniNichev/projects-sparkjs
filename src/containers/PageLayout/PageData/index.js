@@ -6,7 +6,8 @@ export default {
         span: 12,
         components: [
           {
-            name: "Header"
+            name: "Header",
+            props: {}
           }
         ]
       },
@@ -14,7 +15,8 @@ export default {
         span: 12,
         components:[
           {
-            name: "About"
+            name: "About",
+            props: {}
           }
         ] 
       }         
@@ -27,7 +29,8 @@ export default {
         span: 12,
         components: [
           {
-            name: "Header"
+            name: "Header",
+            props: {}
           }
         ]
       },
@@ -35,7 +38,8 @@ export default {
         span: 12,
         components:[
           {
-            name: "Home"
+            name: "Home",
+            props: {}
           }
         ] 
       },        
@@ -48,7 +52,8 @@ export default {
         span: 12,        
         components: [
           {
-            name: "Header"
+            name: "Header",
+            props: {}
           }
         ]
       },
@@ -56,7 +61,8 @@ export default {
         span: 12,
         components:[
           {
-            name: "Greetings"
+            name: "Greetings",
+            props: { user: "Jhon"}
           }
         ] 
       },        
@@ -69,7 +75,8 @@ export default {
         span: 12,
         components:[
           {
-            name: "Greetings"
+            name: "Greetings",
+            props: {}
           }
         ] 
       },        
