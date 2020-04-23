@@ -62,7 +62,7 @@ export default {
         components:[
           {
             name: "Greetings",
-            props: { user: "John"}
+            props: { user: "Sam"}
           }
         ] 
       },        
