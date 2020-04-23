@@ -13,8 +13,7 @@ pipeline {
     stage('Install dependencies') {
       steps {
         echo '######################'              
-        echo 'Building...'    
-        sh 'echo echo $PATH'      
+        echo 'Building...'       
         echo '######################'                      
         sh '/usr/local/bin/yarn install'
       }
