@@ -1,14 +1,16 @@
-import jenkins.model.Jenkins
-
-def instance = Jenkins.instance
-instance.setCrumbIssuer(null)
-
 pipeline {
   agent any
     
   tools {nodejs "SparkJS"}
     
   stages {
+
+    stage('disable CFR') {
+      import jenkins.model.Jenkins
+
+      def instance = Jenkins.instance
+      instance.setCrumbIssuer(null)      
+    }
         
     stage('Cloning Git Repo') {
       steps {
