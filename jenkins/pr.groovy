@@ -1,3 +1,5 @@
+import jenkins.model.Jenkins
+
 pipeline {
   agent any
     
@@ -6,7 +8,6 @@ pipeline {
   stages {
 
     stage('disable CFR') {
-      import jenkins.model.Jenkins
 
       def instance = Jenkins.instance
       instance.setCrumbIssuer(null)      
