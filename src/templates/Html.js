@@ -7,7 +7,7 @@ const Html = ({ content, cssBundles, jsBundles, apiData }) => (
   <head>
     <meta charSet="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Server Side Rendering and Bundle Splitting (2)</title>
+    <title>Server Side Rendering and Bundle Splitting (3)</title>
 
     { // don't add this to DEV since there it will be served from Webpack-dev-server
       process.env.ENVIRONMENT !== 'development' && (
