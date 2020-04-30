@@ -23,10 +23,8 @@ pipeline {
       steps {
         echo '######################'              
         echo 'Running tests ...'          
-        echo '######################'        
-        catchError(buildResult: 'SUCCESS', stageResult: 'failed') {       
-          sh '/usr/local/bin/yarn test'
-        }
+        echo '######################'               
+         sh '/usr/local/bin/yarn test'
       }
     }      
   }
