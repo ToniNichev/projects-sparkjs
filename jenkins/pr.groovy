@@ -27,6 +27,16 @@ pipeline {
          sh '/usr/local/bin/yarn test'
       }
     }      
+
+    stage('Running SonarQube Scanner') {
+      steps {
+        echo '######################'              
+        echo 'Running tests ...'          
+        echo '######################'               
+         sh 'ls /Users/toninichev/Cloud/workspace/nodeJS/Examples/Sparkjs;sonar-scanner'
+      }
+    }
+
   }
 
   post { 
