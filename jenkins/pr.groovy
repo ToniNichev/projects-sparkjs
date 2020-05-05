@@ -33,7 +33,7 @@ pipeline {
         echo '######################'              
         echo 'Running tests ...'          
         echo '######################'               
-         sh 'ls /Users/toninichev/Cloud/workspace/nodeJS/Examples/Sparkjs;sonar-scanner'
+         sh 'ls /Users/toninichev/Cloud/workspace/nodeJS/Examples/Sparkjs;/usr/local/bin/sonar-scanner'
       }
     }
 
