@@ -31,7 +31,7 @@ pipeline {
     stage('Running SonarQube Scanner') {
       steps {
         echo '######################'              
-        echo 'Running tests ...'          
+        echo 'Running SonarQube Scanner ...'          
         echo '######################'               
          sh 'ls /Users/toninichev/Cloud/workspace/nodeJS/Examples/Sparkjs;/usr/local/bin/sonar-scanner'
       }
