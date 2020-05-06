@@ -30,7 +30,7 @@ pipeline {
 
     stage('Running SonarQube Scanner') {
       environment {
-          scannerHome = tool 'Tonis SonarQube'
+          scannerHome = tool 'SonarScanner4.3'
       }      
 
       steps {
