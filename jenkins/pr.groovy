@@ -29,11 +29,21 @@ pipeline {
     }      
 
     stage('Running SonarQube Scanner') {
+      environment {
+          scannerHome = tool 'Tonis SonarQube'
+      }      
+
       steps {
         echo '######################'              
         echo 'Running SonarQube Scanner ...'          
-        echo '######################'               
-         sh 'ls /Users/toninichev/Cloud/workspace/nodeJS/Examples/Sparkjs;/usr/local/bin/sonar-scanner'
+        echo '######################'   
+
+        withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }      
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }        
       }
     }
 
