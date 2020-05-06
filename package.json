@@ -20,6 +20,15 @@
     "setupFiles": [
       "./src/setupTests.js"
     ],
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!coverage/**",
+      "!node_modules/**",
+      "!src/index.js",
+      "!src/setupTests.js",
+      "!public/**",
+      "!server-build/**"
+    ],    
     "moduleNameMapper": {
       "\\.(css|less|scss)$": "<rootDir>/src/__mocks__/styleMock.js"
     },
