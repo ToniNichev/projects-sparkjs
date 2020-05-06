@@ -12,18 +12,18 @@ pipeline {
     }
     stage('Install dependencies') {
       steps {
-        echo '######################'              
+        echo '#################################'              
         echo 'Building...'       
-        echo '######################'                      
+        echo '#################################'                      
         sh '/usr/local/bin/yarn install'
       }
     }
      
     stage('Running Tests') {
       steps {
-        echo '######################'              
+        echo '#################################'              
         echo 'Running tests ...'          
-        echo '######################'               
+        echo '#################################'               
          sh '/usr/local/bin/yarn test'
       }
     }      
@@ -34,9 +34,9 @@ pipeline {
       }      
 
       steps {
-        echo '######################'              
+        echo '#################################'              
         echo 'Running SonarQube Scanner ...'          
-        echo '######################'   
+        echo '#################################'   
 
         withSonarQubeEnv('sonarqube') {
             sh "${scannerHome}/bin/sonar-scanner"
