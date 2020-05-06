@@ -7,7 +7,7 @@ import toJson from 'enzyme-to-json';
 describe('Testing Header component', () => {
     it('renders as expected!!!', () => {
       const wrapper = shallow(
-        <Header title="Title test" />
+        <Header title="Title test 123" />
       );
      expect(toJson(wrapper)).toMatchSnapshot();
    });
