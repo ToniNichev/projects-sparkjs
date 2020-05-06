@@ -44,5 +44,6 @@ pipeline {
           sh '/usr/local/bin/pm2 start ./server-build/server-bundle.js -f'
       }
     }      
-
+    
   }
+}
