@@ -40,7 +40,7 @@ pipeline {
        }
     }
    
-       // No need to occupy a node
+    // No need to occupy a node
     stage("Quality Gate"){
      steps {
          script {
