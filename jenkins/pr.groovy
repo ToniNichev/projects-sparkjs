@@ -29,21 +29,28 @@ pipeline {
     }      
 
     stage('Running SonarQube Scanner') {
-      environment {
-          scannerHome = tool 'SonarScanner'
-      }      
-
-      steps {
-        echo '#################################'              
-        echo 'Running SonarQube Scanner ...'          
-        echo '#################################'   
-
-        withSonarQubeEnv('sonarqube') {
-            sh 'ls /Users/toninichev/Cloud/workspace/nodeJS/Examples/Sparkjs;/usr/local/bin/sonar-scanner'
-        }      
-        timeout(time: 10, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
-        }        
+       steps {
+            script {
+              // requires SonarQube Scanner 2.8+
+              scannerHome = tool 'SonarScanner'
+            }
+            withSonarQubeEnv('Tonis SonarQube') { // If you have configured more than one global server connection, you can specify its name
+              sh "${scannerHome}/bin/sonar-scanner"
+            }
+       }
+    }
+   
+       // No need to occupy a node
+    stage("Quality Gate"){
+     steps {
+         script {
+              timeout(time: 2, unit: 'MINUTES') { // Just in case something goes wrong, pipeline will be killed after a timeout
+                def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+                if (qg.status != 'OK') {
+                  error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                }
+              }
+         }
       }
     }
 
