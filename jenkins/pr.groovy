@@ -38,11 +38,11 @@ pipeline {
 
         withSonarQubeEnv('SonarScanner') {
             sh 'ls /Users/toninichev/Cloud/workspace/nodeJS/Examples/Sparkjs;/usr/local/bin/sonar-scanner'
-        }      
+        }           
+      }
         timeout(time: 10, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
-        }        
-      }
+        }         
     }
 
     stage('Deploy and run server') {
