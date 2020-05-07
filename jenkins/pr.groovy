@@ -30,7 +30,7 @@ pipeline {
 
     stage('Running SonarQube Scanner') {
       environment {
-          scannerHome = tool 'SonarScanner4.3'
+          scannerHome = tool 'SonarScanner'
       }      
 
       steps {
@@ -39,7 +39,7 @@ pipeline {
         echo '#################################'   
 
         withSonarQubeEnv('sonarqube') {
-            sh "${scannerHome}/bin/sonar-scanner"
+            sh 'ls /Users/toninichev/Cloud/workspace/nodeJS/Examples/Sparkjs;/usr/local/bin/sonar-scanner'
         }      
         timeout(time: 10, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
