@@ -8,10 +8,10 @@ import Loadable from 'react-loadable';
 import manifest from './dist/loadable-manifest.json';
 import { getBundles } from 'react-loadable/webpack';
 import ReactDOMServer from 'react-dom/server';
-import PageData from './src/containers/PageLayout/PageData'; 
 import templateList from './src/templates/TemplateList';
 import cookieParser from 'cookie-parser';
 import cookiesManagement from './expressMiddlewares/cookiesManagement';
+import requestDataFromAPI from './expressMiddlewares/requestDataFromAPI';
 
 const {APP_HOST, SERVER_PORT, ENVIRONMENT} = process.env;
 
@@ -60,27 +60,10 @@ app.get('/Robots.txt', (req, res) => {
   `)
 });
 
-app.get('/*', (req, res) => {   
-  
-  // example of getting backend data from API
-  fetch('http://www.toni-develops.com/external-files/examples/sample-apis/users.json')
-  .then(function(response) {
-      if (response.status >= 400) {
-          throw new Error("Bad response from server");
-      }
-      return response.json();
-  })
-  .then(function(apiData) {
-    apiData = {
-      home: apiData,
-      about: {
-        userName : "Test",
-        whichComponent : false
-      }
-    }
-    const templateName = PageData[req.url].template;    
-    response(req, res, apiData, templateName);
-  });  
+app.get('/*', 
+  requestDataFromAPI, 
+  function (req, res, next) {
+   response(req, res, req.apiData, req.templateName);
 });
 
 Loadable.preloadAll().then(() => {
