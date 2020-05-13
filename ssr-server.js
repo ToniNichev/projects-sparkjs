@@ -10,12 +10,14 @@ import { getBundles } from 'react-loadable/webpack';
 import ReactDOMServer from 'react-dom/server';
 import PageData from './src/containers/PageLayout/PageData'; 
 import templateList from './src/templates/TemplateList';
+import cookieParser from 'cookie-parser';
 
 const {APP_HOST, SERVER_PORT, ENVIRONMENT} = process.env;
 
-const app = express();
+const app = new express();
 
 
+app.use(cookieParser());
 app.use('/server-build', express.static('./server-build'));
 app.use('/dist', express.static('dist')); // to serve frontent prod static files
 app.use('/favicon.ico', express.static('./static-assets/favicon.ico'));
@@ -54,6 +56,23 @@ app.get('/Robots.txt', (req, res) => {
 });
 
 app.get('/*', (req, res) => {   
+  
+  // example of adding cookie
+  var cookie = req.cookies.testCookie;
+  if (cookie === undefined)
+  {
+    // no: set a new cookie
+    var randomNumber = new Date().toDateString();
+    res.cookie('testCookie',randomNumber, { maxAge: 900000, httpOnly: true });
+    console.log('cookie created successfully');
+  } 
+  else
+  {
+    // yes, cookie was already present 
+    console.log('cookie exists', cookie);
+  } 
+
+  // example of getting backend data from API
   fetch('http://www.toni-develops.com/external-files/examples/sample-apis/users.json')
   .then(function(response) {
       if (response.status >= 400) {

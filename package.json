@@ -28,14 +28,16 @@
       "!src/setupTests.js",
       "!public/**",
       "!server-build/**"
-    ],    
+    ],
     "moduleNameMapper": {
       "\\.(css|less|scss)$": "<rootDir>/src/__mocks__/styleMock.js"
     },
     "coverageDirectory": "reports/coverage",
-    "coverageReporters": 
-        ["json","lcov", "text"]
-    ,
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text"
+    ],
     "testResultsProcessor": "jest-sonar-reporter"
   },
   "jestSonar": {
@@ -77,6 +79,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "apollo-cache-inmemory": "^1.5.1",
+    "cookie-parser": "^1.4.5",
     "dotenv": "^7.0.0",
     "dotenv-expand": "^5.1.0",
     "file-loader": "^3.0.1",
