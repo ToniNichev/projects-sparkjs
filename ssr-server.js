@@ -11,6 +11,7 @@ import ReactDOMServer from 'react-dom/server';
 import PageData from './src/containers/PageLayout/PageData'; 
 import templateList from './src/templates/TemplateList';
 import cookieParser from 'cookie-parser';
+import cookiesManagement from './expressMiddlewares/cookiesManagement';
 
 const {APP_HOST, SERVER_PORT, ENVIRONMENT} = process.env;
 
@@ -49,6 +50,10 @@ function response(req, res, apiData, templateName) {
   res.end();
 }
 
+
+// adding cookie middleware
+app.use(cookiesManagement);
+
 app.get('/Robots.txt', (req, res) => {   
   res.send(`
   User-agent: * Disallow: /
@@ -57,21 +62,6 @@ app.get('/Robots.txt', (req, res) => {
 
 app.get('/*', (req, res) => {   
   
-  // example of adding cookie
-  var cookie = req.cookies.testCookie;
-  if (cookie === undefined)
-  {
-    // no: set a new cookie
-    var randomNumber = new Date().toDateString();
-    res.cookie('testCookie',randomNumber, { maxAge: 900000, httpOnly: true });
-    console.log('cookie created successfully');
-  } 
-  else
-  {
-    // yes, cookie was already present 
-    console.log('cookie exists', cookie);
-  } 
-
   // example of getting backend data from API
   fetch('http://www.toni-develops.com/external-files/examples/sample-apis/users.json')
   .then(function(response) {
