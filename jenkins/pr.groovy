@@ -26,7 +26,16 @@ pipeline {
         echo '#################################'               
          sh '/usr/local/bin/yarn test'
       }
-    }      
+    }    
+
+    stage('Running Tests') {
+      steps {
+        echo '#################################'              
+        echo 'Running ESLint ...'          
+        echo '#################################'               
+         sh '/usr/local/bin/yarn lint'
+      }
+    }       
 
     stage('Running SonarQube Scanner') {
        steps {
