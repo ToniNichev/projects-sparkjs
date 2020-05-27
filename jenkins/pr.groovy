@@ -28,7 +28,7 @@ pipeline {
       }
     }    
 
-    stage('Running Tests') {
+    stage('Running ESLint') {
       steps {
         echo '#################################'              
         echo 'Running ESLint ...'          
