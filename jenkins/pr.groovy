@@ -19,7 +19,7 @@ pipeline {
       }
     }
 
-    stage('Run Test Script') {
+    stage('Run Test Script/*  */') {
       steps {
         echo '#################################'              
         echo 'Building...'       
