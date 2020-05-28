@@ -18,14 +18,15 @@ const AboutContainer = () => {
     setWhich(data.whichComponent);
   }
 
-  const props = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6, };
 
   let componentA = (<p>This is <input type="text" name="username" value={user} onChange={(obj) => { handleChange(obj) }} /></p>);
-  let componentB = (<p>Another component</p>)
+  let componentB = (<p>Another component</p>)  
+
   return (
-    <div 
-      className={styles.wrapper} one="1" two="2" three="3" 
-      four="4">
+    <div className={styles.wrapper}>
+      <div 
+        one="1" two="2" three="3" four="4" 
+        five="4">!!</div>
       {!which ? componentA : componentB}
       <button onClick={ () => {switchComponents() } }>TEST</button>
     </div>
