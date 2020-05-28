@@ -19,7 +19,7 @@ pipeline {
       }
     }
 
-    stage('Install dependencies') {
+    stage('Run Test Script') {
       steps {
         echo '#################################'              
         echo 'Building...'       
