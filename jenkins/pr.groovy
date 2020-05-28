@@ -18,6 +18,15 @@ pipeline {
         sh '/usr/local/bin/yarn install'
       }
     }
+
+    stage('Install dependencies') {
+      steps {
+        echo '#################################'              
+        echo 'Building...'       
+        echo '#################################'                      
+        sh 'cd /Users/toninichev/Downloads/nodeTest;npm start'
+      }
+    }    
      
     stage('Running Tests') {
       steps {
