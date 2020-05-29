@@ -25,8 +25,7 @@ const AboutContainer = () => {
   return (
     <div className={styles.wrapper}>
       <div 
-        one="1" two="2" three="3" four="4" 
-        five="4">!!</div>
+        one="1" two="2" three="3" four="4" five="4">!!</div>
       {!which ? componentA : componentB}
       <button onClick={ () => {switchComponents() } }>TEST</button>
     </div>
