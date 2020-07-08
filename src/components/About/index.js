@@ -16,6 +16,7 @@ const AboutContainer = () => {
   function switchComponents() {
     data.whichComponent = !which;
     setWhich(data.whichComponent);
+    console.log("This is console log test 1");
   }
 
 
