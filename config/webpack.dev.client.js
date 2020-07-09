@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const Loadable  = require('react-loadable/webpack');
 const path = require('path');
 const HelloWorldPlugin = require('../src/modules');
-var HardSourceWebpackPlugin = require('hard-source-webpack-plugin-fixed-hashbug');
 
 const publicPath = `${process.env.APP_HOST}:${process.env.ASSETS_SERVER_PORT}/dist/`;
 
@@ -106,11 +105,5 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin() ,
    
     new HelloWorldPlugin( { outputPath: path.resolve(__dirname + '/')}),
-    new HardSourceWebpackPlugin({
-      configHash: function(webpackConfig) {
-        // node-object-hash on npm can be used to build this.
-        return require('node-object-hash')({sort: false}).hash(webpackConfig);
-      },
-    })
   ]
 };

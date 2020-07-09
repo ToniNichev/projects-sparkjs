@@ -1,7 +1,19 @@
+const {
+	SyncHook,
+	SyncBailHook,
+	SyncWaterfallHook,
+	SyncLoopHook,
+	AsyncParallelHook,
+	AsyncParallelBailHook,
+	AsyncSeriesHook,
+	AsyncSeriesBailHook,
+	AsyncSeriesWaterfallHook
+ } = require("tapable");
 
 const fs = require('fs');
 const chalk = require('chalk');
 const ConcatSource = require("webpack-sources").ConcatSource;
+
 
 
 module.exports = class DemoPlugin {
@@ -11,7 +23,6 @@ module.exports = class DemoPlugin {
     this.options = options;
   }
 
-
   validateOptions(options) {
     if (!options || !options.outputPath) {
       const msg = `Please specify an outputPath.`;
@@ -20,56 +31,72 @@ module.exports = class DemoPlugin {
   }  
 
 
-  async toReplace(source) {
-    var patt = /\s*console.log\([^\)]*\)(;|)/i;
-    var result = source.replace(patt, '');
-
-    return result;
-  }
-
-  
-  async findChunks(compilation){
-    let chunks = compilation.chunks;
-    var self = this;
-    for (let i = 0, len = chunks.length; i < len; i++) {
-        for(var file of chunks[i].files)
-        {
-          (async(file,self)=> {
-            let source = compilation.assets[file].source();
-
-            const filename = 'cache/' + file;
-            fs.writeFile(filename, source, function (err) {
-              if (err) return console.log(err);
-              console.log('writing > ' + file );
-            });
-
-            const replaceSource = await self.toReplace(source);
-            compilation.assets[file]= new ConcatSource(replaceSource);
-
-          })(file,self)
-        }
-    }
-  }
 
   apply(compiler) {
 
-    compiler.hooks.done.tap('Hello World Plugin', (
-      stats /* stats is passed as an argument when done hook is tapped.  */
-    ) => {
-      console.log('Hello World!');
-    });
-    
-    
   	const startTime = Date.now();
     var self = this;
-    //compiler.plugin('emit',async function(compilation, callback) {
-      
+    this.compiler = compiler;    
+    compiler.hooks.autodllStatsRetrieved = new SyncHook(['stats', 'source']);
+    
+    compiler.hooks.beforeCompile.tapAsync('MyPlugin', (params, callback) => {
+      console.log('====== beforeCompile ==========');
+      //const dependencies = new Set(params.compilationDependencies);
+      //[...dependencies].filter(path => !path.startsWith(cacheDir));
+      //console.log(params.compilationDependencies);
+      //return;
+      callback();
+    });       
+
+    compiler.hooks.watchRun.tapAsync('MyPlugin', (compiler, callback) => {
+      console.log('====== watchRun ==========');
+      //return;
+      callback();
+    });    
+
+
     compiler.hooks.emit.tapAsync('FileListPlugin TEST NAME', (compilation, callback) => {
-        self.findChunks(compilation)
-        console.info('[build time]:'+parseInt((Date.now()-startTime) / 1000)+'s')
-        callback();
-    });
+      console.log('====== emit ==========');
+      for (let [filename, asset] of Object.entries(compilation.assets)) {
+
+        
+        this.readFromCache(filename, compilation, data => {
+          compilation.assets[filename] = new ConcatSource(data);        
+          callback();
+        });
+
+        //this.writeToCache(filename, asset);
+        //callback();
+      }
+      console.info('[build time]:'+parseInt((Date.now()-startTime) / 1000)+'s');
+    });               
   }
+
+  readFromCache(filename, compilation, callback) {
+    const fullFilename = this.getFullFilPath(filename);
+    fs.readFile(fullFilename, 'utf8', function (err,data) {
+      if (err) {
+        return console.log(err);
+      }
+      //data = "alert()\n" + data;
+      callback(data);
+      console.log("[reading] ",fullFilename);
+    });    
+  }
+
+  writeToCache(filename, asset) {
+    const fullFilename = this.getFullFilPath(filename);    
+    let source = asset.source();
+    fs.writeFile(fullFilename, source, function (err) {
+      if (err) return console.log(err);
+      console.log('[writing]' + fullFilename );
+    });    
+  }
+
+  getFullFilPath(filename) {
+    return 'cache/' + filename;        
+  }
+
 };
 
 

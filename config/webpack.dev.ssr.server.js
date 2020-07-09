@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const NodemonPlugin = require('nodemon-webpack-plugin');
 const getEnvironmentConstants = require('../getEnvironmentConstants');
+const HelloWorldPlugin = require('../src/modules');
 
 var e = getEnvironmentConstants();
 
@@ -107,6 +108,8 @@ module.exports = {
       verbose: true,
       // Node arguments.
       // nodeArgs: [ '--inspect-brk' ]
-    }),    
+    }), 
+    
+    new HelloWorldPlugin( { outputPath: path.resolve(__dirname + '/')}),    
   ]
 };
