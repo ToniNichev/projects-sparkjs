@@ -1,6 +1,4 @@
 import React, { Component, useEffect, useState } from 'react';
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
 import styles from './styles.scss';
 
 const data = typeof window == 'undefined' ? 'no data on server side' : __API_DATA__.about;
@@ -35,11 +33,7 @@ const AboutContainer = () => {
   let componentB = (<p>Another component</p>)  
 
   return (
-    <div className={styles.wrapper}>
-      <HighchartsReact
-          highcharts={Highcharts}
-          options={options}
-        />      
+    <div className={styles.wrapper}>    
       <div 
         one="1" two="2" three="3" four="4" 
         five="4">!!</div>

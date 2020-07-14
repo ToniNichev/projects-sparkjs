@@ -6,6 +6,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const NodemonPlugin = require('nodemon-webpack-plugin');
 const getEnvironmentConstants = require('../getEnvironmentConstants');
 const HelloWorldPlugin = require('../src/modules');
+var HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 var e = getEnvironmentConstants();
 
@@ -111,5 +112,7 @@ module.exports = {
     }), 
     
     new HelloWorldPlugin( { outputPath: path.resolve(__dirname + '/')}),    
+
+    new HardSourceWebpackPlugin()
   ]
 };

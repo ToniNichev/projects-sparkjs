@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const Loadable  = require('react-loadable/webpack');
 const path = require('path');
 const HelloWorldPlugin = require('../src/modules');
+var HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 const publicPath = `${process.env.APP_HOST}:${process.env.ASSETS_SERVER_PORT}/dist/`;
 
@@ -105,5 +106,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin() ,
    
     new HelloWorldPlugin( { outputPath: path.resolve(__dirname + '/')}),
+
+    new HardSourceWebpackPlugin()
   ]
 };

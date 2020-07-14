@@ -21,6 +21,7 @@ module.exports = class DemoPlugin {
   constructor(options) {
     this.validateOptions(options);
     this.options = options;
+    this.shouldReadFromCache = false;
   }
 
   validateOptions(options) {
@@ -30,6 +31,9 @@ module.exports = class DemoPlugin {
     }
   }  
 
+  beforeCompile(compiler, callback) {
+    console.log("!!!!!!!!!!!!! beforeCompile");
+  }
 
 
   apply(compiler) {
@@ -48,9 +52,12 @@ module.exports = class DemoPlugin {
       callback();
     });       
 
+
     compiler.hooks.watchRun.tapAsync('MyPlugin', (compiler, callback) => {
       console.log('====== watchRun ==========');
       //return;
+
+      
       callback();
     });    
 
@@ -59,14 +66,16 @@ module.exports = class DemoPlugin {
       console.log('====== emit ==========');
       for (let [filename, asset] of Object.entries(compilation.assets)) {
 
-        
-        this.readFromCache(filename, compilation, data => {
-          compilation.assets[filename] = new ConcatSource(data);        
+        if(this.shouldReadFromCache) {
+          this.readFromCache(filename, compilation, data => {
+            compilation.assets[filename] = new ConcatSource(data);        
+            callback();
+          });
+        }
+        else {
+          this.writeToCache(filename, asset);
           callback();
-        });
-
-        //this.writeToCache(filename, asset);
-        //callback();
+        }
       }
       console.info('[build time]:'+parseInt((Date.now()-startTime) / 1000)+'s');
     });               
