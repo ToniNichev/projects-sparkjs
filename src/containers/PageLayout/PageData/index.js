@@ -1,4 +1,18 @@
 export default {
+  '/system' : {
+    template: "Html",    
+    layout: [ 
+      {
+        span: 12,
+        components: [
+          {
+            name: "System",
+            props: {}
+          }
+        ]
+      },
+    ]    
+  },  
   '/about' : {
     template: "Html",    
     layout: [ 

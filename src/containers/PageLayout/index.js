@@ -10,6 +10,7 @@ class PageLayout extends Component {
     render() {
       const url = this.props.location.pathname;
       const page = PageData[url];
+      console.log("##########################!!!!!!!!!!!!!");
 
       const allLayout = page.layout.map((layoutList) => {
         const layout = layoutList.components.map((component, id , components) => {

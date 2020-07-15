@@ -39,6 +39,7 @@ const AboutContainer = () => {
         five="4">!!</div>
       {!which ? componentA : componentB}
       <button onClick={ () => {switchComponents() } }>TEST</button>
+      <p>{process.env.APP_NAME}</p>
     </div>
   );
 

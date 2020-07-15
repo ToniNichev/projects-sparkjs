@@ -1,5 +1,10 @@
 import Loadable from 'react-loadable';
 import Loading from '../../../components/Loading';
+/* system components */
+const System = Loadable({
+  loader: () => import ('../../../components/System'),
+  loading: Loading
+});
 /* Components */
 const Header = Loadable({
   loader: () => import ('../../../components/Header'),
@@ -18,8 +23,9 @@ const Greetings = Loadable({
   loading: Loading
 });
 export default {
-  Home: Home,
-  About: About,
-  Greetings: Greetings,
-  Header: Header
+  System,
+  Home,
+  About,
+  Greetings,
+  Header
 }

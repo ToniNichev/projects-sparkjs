@@ -105,8 +105,8 @@ module.exports = {
     // hot reload
     new webpack.HotModuleReplacementPlugin() ,
    
-    new HelloWorldPlugin( { outputPath: path.resolve(__dirname + '/')}),
+    //new HelloWorldPlugin( { outputPath: path.resolve(__dirname + '/')}),
 
-    new HardSourceWebpackPlugin()
+    //new HardSourceWebpackPlugin()
   ]
 };
